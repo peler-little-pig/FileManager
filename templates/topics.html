@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ board.name }} - {{ block.super }}
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+    <li class="breadcrumb-item active">{{ board.name }}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="mb-4">
+        <a href="{% url 'new_topic' board.pk%}" class="btn btn-primary">New topic</a>
+    </div>
+
+    <table class="table mb-4">
+        <thead class="thead-dark">
+            <tr>
+                <th>Topic</th>
+                <th>Post</th>
+                <th>Starter</th>
+                <th>File</th>
+                <th>Last Update</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for topic in board.topics.all %}
+                <tr>
+                    <td>{{ topic.subject }}</td>
+                    <td>{{ topic.message }}</td>
+                    <td>{{ topic.starter.username }}</td>
+                    <td><a href="{% url 'home' %}download{{ topic.file.url }} " class="btn btn-primary">{{ topic.file_path }}</a></td>
+                    <td class="align-middle">{{ board.get_last_post }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base_accounts.html' %}
+
+{% block title %}Sign up to Peler's File Manage{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 col-sm-8">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">Sign up</h3>
+                    <form method="post" novalidate>
+                        {% csrf_token %}
+                        {% include 'includes/form.html' %}
+                        <button type="submit" class="btn btn-primary btn-block">Create an account</button>
+                    </form>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    Already have an account?<a href="{% url 'login' %}">Sign in</a>
+                </div>
+            </div>
+            <div class="text-center py-2">
+                <small>
+                    <a href="#" class="text-muted">Forgot your password?</a>
+                </small>
+            </div>
+        </div>
+    </div>
+{% endblock %}
